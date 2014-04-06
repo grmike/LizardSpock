@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Ящерица Спок</title>
+    <style type="text/css">
+
+        .choice 
+        {
+            cursor: pointer;
+            border: 3px white solid;
+        }    
+        .choice:hover 
+        {
+            border: 3px green solid;
+        }
+    </style>
+    <script src="jquery-2.0.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+        var GameRules = function () {
+            this.winnersmap =
+                    [
+                    [0, 1, 2, 1, 2],
+                    [2, 0, 1, 2, 1],
+                    [1, 2, 0, 1, 2],
+                    [2, 1, 2, 0, 1],
+                    [1, 2, 1, 2, 0]
+                    ];
+            this.items = {
+                scissors: { num: 0, name: 'scissors', img: 'pics/scissors.gif' },
+                paper: { num: 1, name: 'paper', img: 'pics/paper.gif' },
+                rock: { num: 2, name: 'rock', img: 'pics/rock.gif' },
+                lizard: { num: 3, name: 'lizard', img: 'pics/lizard.gif' },
+                spock: { num: 4, name: 'spock', img: 'pics/spock.gif' },
+            };
+            this.getItemByNum = function(num){
+                for (k in this.items)
+                    if (this.items.hasOwnProperty(k)) {
+                        var prop = this.items[k];
+                        if (prop.num == num) return prop;
+                    }
+            }
+        }
+
+        
+
+        function DoMove() {
+            
+            // получаем свой выбор
+            var myval = $(this).attr('value');
+            // переводим его в число
+            var my = rules.items[myval].num;
+            // получаем числовой выбор противника
+            var enemy = EnemyMove();
+            // выводим результат
+            ShowResult(my, enemy);
+        }
+
+        function EnemyMove() {
+
+            // случайная генерация хода противника
+            var enemy = Math.round(Math.random() * 4);
+            // показываем выбор противника
+            var img = rules.getItemByNum(enemy).img;
+            $('#enemyImg').attr('src', img);
+            return enemy;
+        }
+
+
+        function ShowResult(my, enemy) {
+
+            var elm = $('#result');
+            var ret = rules.winnersmap[my][enemy]
+            switch (ret) {
+                case 0: elm.css('color', 'brown').text('Ничья');
+                    break;
+                case 1: elm.css('color', 'green').text('Ты победил');
+                    break;
+                case 2: elm.css('color', 'red').text('Ты проиграл');
+                    break;
+            }
+
+        }
+
+        $(document).ready(function () {
+
+            rules = new GameRules();
+            $('.choice').click(DoMove);
+
+        });
+        
+    </script>
+</head>
+<body>
+<h1>Ящерица Спок</h1>
+
+<div style="margin: auto auto; width: 220px; height: 220px;">
+    <img id="enemyImg" src="pics/spock.gif" />
+</div>
+<br/>
+<div style="margin: auto auto; width: 520px; height: 120px;">
+    <span id="result" style="width: 100%; font-size: 40pt; font-family: verdana"></span>
+</div>
+<br />
+<div style="margin: auto auto; width: 1050px; height: 220px;">
+    <img class="choice" value="rock" src="pics/rock.gif" />
+    <img class="choice" value="scissors" src="pics/scissors.gif" />
+    <img class="choice" value="paper" src="pics/paper.gif" />
+    <img class="choice" value="lizard" src="pics/lizard.gif" />
+    <img class="choice" value="spock" src="pics/spock.gif" />
+</div>
+</body>
+</html>
