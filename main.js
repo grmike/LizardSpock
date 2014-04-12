@@ -44,7 +44,7 @@ function DoMove() {
 
 function EnemyMove() {
 	// случайная генерация хода противника
-	var enemy = Math.round(Math.random() * 4);
+    var enemy = Math.floor(Math.random() * 5);
 	// показываем выбор противника
 	var img = rules.getItemByNum(enemy).img;
 	$('#enemyImg').attr('src', img);

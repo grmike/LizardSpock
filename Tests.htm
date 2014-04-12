@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Тесты</title>
+    <script src="jquery-2.0.2.min.js" type="text/javascript"></script>
+    <script src="tests.js" type="text/javascript"></script>
+    <style>
+    
+        .table {display: table;}
+        .row {display: table-row;}
+        .row div {display: table-cell; padding: 0 10px;}
+    
+    </style>
+</head>
+<body>
+<h2>Тест случайного распределения</h2>
+
+<div class="table">
+    <div class="row">
+        <div><label>первоначальное распределение</label></div>
+        <div><button onclick="randomTest(1000);">запуск</button></div>
+        <div>результат:</div>
+        <div><span id="randomResult"></span></div>
+    </div>
+    <div class="row">
+        <div><label>улучшенное распределение</label></div>
+        <div><button onclick="randomBetterTest(1000);">запуск</button></div>
+        <div>результат:</div>
+        <div><span id="randomBetterResult"></span></div>
+    </div>
+    <div class="row">
+        <div><label>улучшенное 2 распределение</label></div>
+        <div><button onclick="randomTemplate(1000, better2Random, 'random2BetterResult');">запуск</button></div>
+        <div>результат:</div>
+        <div><span id="random2BetterResult"></span></div>
+    </div>
+</div>
+
+</body>
+</html>
